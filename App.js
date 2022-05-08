@@ -17,6 +17,19 @@ const fetchFonts = () => {
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [count, setCount] = useState(0); 
+
+  const increaseHandler = () => {
+    setCount(count + 1);
+  } 
+
+  const decreaseHandler = () => {
+    setCount(count - 1);
+  }
+
+  const resetHandler = () => {
+    setCount(0);
+  }
 
   if(!fontLoaded) {
     <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} onError={(err) => console.log(err)} />
@@ -27,12 +40,12 @@ export default function App() {
       <View style={styles.containerBody}>
         <View style={styles.containerText}>
           <Text style={styles.appTitle}>Counter App</Text>
-          <Text style={styles.count}>0</Text>
+          <Text style={styles.count} >{count}</Text>
         </View>
         <View style={styles.containerFooter} className="containerFooter">
-          <Button onPress={handlerDecrease} className="btnSubtract" buttonStyle={{backgroundColor: Colors.red, padding: 16, marginVertical: 4, marginHorizontal: 16}} titleStyle={{ fontFamily:'ubuntu-bold', fontSize:24, paddingVertical: 0, paddingHorizontal: 10 }}  color={Colors.red} title='Subtract' icon={<Icon name='arrow-down' size={15} color={Colors.white} />} />
-          <Button className="btnReset" buttonStyle={{backgroundColor: Colors.white, padding: 16, marginVertical: 4, marginHorizontal: 16}} titleStyle={{ color:Colors.black, fontFamily:'ubuntu-bold', fontSize:24, paddingVertical: 0, paddingHorizontal: 10 }} title='Reset' icon={<Icon name='spinner' size={15} color={Colors.black} />} />
-          <Button className="btnAdd" buttonStyle={{backgroundColor: Colors.green, padding: 16, marginVertical: 4, marginHorizontal: 16}} titleStyle={{ fontFamily:'ubuntu-bold', fontSize:24, paddingVertical: 0, paddingHorizontal: 10 }}  title='Add' icon={<Icon name='arrow-up' size={15} color={Colors.white} />} />
+          <Button onPress={decreaseHandler} className="btnSubtract" buttonStyle={{backgroundColor: Colors.red, padding: 16, marginVertical: 4, marginHorizontal: 16}} titleStyle={{ fontFamily:'ubuntu-bold', fontSize:24, paddingVertical: 0, paddingHorizontal: 10 }}  color={Colors.red} title='Subtract' icon={<Icon name='arrow-down' size={15} color={Colors.white} />} />
+          <Button onPress={resetHandler} className="btnReset" buttonStyle={{backgroundColor: Colors.white, padding: 16, marginVertical: 4, marginHorizontal: 16}} titleStyle={{ color:Colors.black, fontFamily:'ubuntu-bold', fontSize:24, paddingVertical: 0, paddingHorizontal: 10 }} title='Reset' icon={<Icon name='spinner' size={15} color={Colors.black} />} />
+          <Button onPress={increaseHandler} className="btnAdd" buttonStyle={{backgroundColor: Colors.green, padding: 16, marginVertical: 4, marginHorizontal: 16}} titleStyle={{ fontFamily:'ubuntu-bold', fontSize:24, paddingVertical: 0, paddingHorizontal: 10 }}  title='Add' icon={<Icon name='arrow-up' size={15} color={Colors.white} />} />
         </View>
       </View>
     </View>
